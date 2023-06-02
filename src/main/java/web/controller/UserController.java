@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.model.User;
 import web.service.UserService;
 
@@ -25,7 +24,7 @@ public class UserController {
         return "userList";
     }
 
-    @PutMapping("/add")
+    @GetMapping("/add")
     public String addUser(@ModelAttribute("user") User user) {
         return "addUser";
     }
@@ -40,18 +39,16 @@ public class UserController {
         return "editUser";
     }
 
-    @PostMapping()
+    @PutMapping()
     public String saveUser(@ModelAttribute("user") @Valid @NotNull User user) {
         userService.addOrEditUser(user);
         return "redirect:/users";
     }
 
-    @DeleteMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id", required = true, defaultValue = "") long id,
-                             RedirectAttributes attributes) {
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return "redirect:/users";
-
     }
 
 }

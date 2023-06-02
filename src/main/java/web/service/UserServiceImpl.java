@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addOrEditUser(User user) {
-        System.out.println("service"+user.toString());
         if (0 == user.getId()) {
             addUser(user);
         } else {
