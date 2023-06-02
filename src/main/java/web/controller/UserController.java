@@ -25,7 +25,7 @@ public class UserController {
         return "userList";
     }
 
-    @GetMapping("/add")
+    @PutMapping("/add")
     public String addUser(@ModelAttribute("user") User user) {
         return "addUser";
     }
@@ -46,7 +46,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public String deleteUser(@RequestParam(value = "id", required = true, defaultValue = "") long id,
                              RedirectAttributes attributes) {
         userService.deleteUser(id);
